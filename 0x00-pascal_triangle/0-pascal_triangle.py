@@ -4,20 +4,23 @@ of integers representing the Pascal's triangle of n """
 
 
 def pascal_triangle(n):
+    """ creates a pascal triangle
+    n:
+        number of rows
+    return:
+        Pascal's triangle """
+    new_pascal = []
+
+    """ Assumes that n is an integer """
     if n <= 0:
-        return []  # Return an empty list for non-positive n
-    
-    triangle = []  # Initialize an empty list to store the triangle
-    
+        return new_pascal
+
     for i in range(n):
-        row = []  # Initialize an empty list for each row
-        for j in range(i + 1):
-            if j == 0 or j == i:
-                row.append(1)  # First and last elements are always 1
-            else:
-                # Calculate the value using the binomial coefficient formula
-                value = triangle[i - 1][j - 1] + triangle[i - 1][j]
-                row.append(value)
-        triangle.append(row)  # Add the row to the triangle
-    
-    return triangle
+        row_index = [1]
+        if new_pascal:
+            final_row = new_pascal[-1]
+            row_index.extend([sum(pair) for pair in
+                              zip(final_row, final_row[1:])])
+            row_index.append(1)
+        new_pascal.append(row_index)
+    return (new_pascal)
