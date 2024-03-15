@@ -1,25 +1,18 @@
 #!/usr/bin/python3
-''' module for working with lockboxes.
+''' module for working with lockboxe.
 '''
 
 
 def canUnlockAll(boxes):
-    # Initialize a set to keep track of the boxes we can access.
-    accessible_boxes = {0}  # Start with the first box (index 0).
-
-    # Initialize a queue for BFS traversal.
-    queue = [0]
-
-    # Perform BFS to explore all reachable boxes.
-    while queue:
-        current_box = queue.pop(0)
-        keys = boxes[current_box]  # Get the keys in the current box.
-
-        for key in keys:
-            if key not in accessible_boxes:
-                # If the key opens a new box, add it to the accessible set and queue.
-                accessible_boxes.add(key)
-                queue.append(key)
-
-    # Check if all boxes are accessible.
-    return len(accessible_boxes) == len(boxes)
+    
+    n = len(boxes)
+    seen_boxes = set([0])
+    unseen_boxes = set(boxes[0]).difference(set([0]))
+    while len(unseen_boxes) > 0:
+        boxIdx = unseen_boxes.pop()
+        if not boxIdx or boxIdx >= n or boxIdx < 0:
+            continue
+        if boxIdx not in seen_boxes:
+            unseen_boxes = unseen_boxes.union(boxes[boxIdx])
+            seen_boxes.add(boxIdx)
+    return n == len(seen_boxes)
