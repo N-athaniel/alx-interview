@@ -24,3 +24,4 @@ def pascal_triangle(n):
             row_index.append(1)
         new_pascal.append(row_index)
     return (new_pascal)
+
