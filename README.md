@@ -1,3 +1,4 @@
-0x00. Pascal's Triangle
+alx-interview: Mock Technical Interview
+
 Algorithm
 Python
